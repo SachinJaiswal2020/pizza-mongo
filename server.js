@@ -5,7 +5,7 @@ const path = require('path')
 
 const app = express()
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8000
 
 // if(process.env.PORT){
 //     PORT = process.env.PORT;
@@ -15,13 +15,26 @@ const PORT = process.env.PORT || 8080
 
 app.use(express.static('public'))
 
+//Layout Template
+app.use(expressLayout)
+app.set('views', path.join(__dirname, '/resources/views'))
+app.set('view engine', 'ejs')
+
 app.get('/', (req,res) => {
     res.render('home')
 })
 
-app.use(expressLayout)
-app.set('views', path.join(__dirname, '/resources/views'))
-app.set('view engine', 'ejs')
+app.get('/cart', (req,res) => {
+    res.render('customers/cart')
+})
+
+app.get('/login', (req,res) => {
+    res.render('auth/login')
+})
+
+app.get('/register', (req,res) => {
+    res.render('auth/register')
+})
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
