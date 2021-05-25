@@ -10,6 +10,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const flash = require('express-flash')
 const MongoDbStore = require('connect-mongo')
+const passport = require('passport')
 
 // if(process.env.PORT){
 //     PORT = process.env.PORT;
@@ -20,6 +21,7 @@ const MongoDbStore = require('connect-mongo')
 
 //MONGODB CONNECTION
 require('./DB/conn')
+
 
 //SESSION CONFIG & SESSION STORE
 app.use(session({
@@ -34,18 +36,30 @@ app.use(session({
 )
 
 
+//PASSPORT CONFIG
+const passportInit = require('./app/config/passport')
+passportInit(passport)
+app.use(passport.initialize())
+app.use(passport.session())
+
+
+//USED FOR FLASH MESSAGES IN LOGIN AND REGISTER
 app.use(flash())
+
 
 //ASSEST
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 
 //GLOBAL MIDDLEWARE
 app.use((req,res,next) =>{
     res.locals.session = req.session
+    res.locals.user = req.user
     next()
 })
+
 
 //Layout Template
 app.use(expressLayout)

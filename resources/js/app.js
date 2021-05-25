@@ -11,7 +11,7 @@ function updateCart(pizza){
             type: 'success',
             timeout: 1000,
             text: 'Item added to cart',
-            progressBar: false,
+            progressBar: true,
             layout: 'topRight'
         }).show();
     }).catch(err =>{
@@ -19,7 +19,7 @@ function updateCart(pizza){
             type: 'error',
             timeout: 1000,
             text: 'Something went wrong',
-            progressBar: false,
+            progressBar: true,
             layout: 'topRight'
         }).show();
     })
