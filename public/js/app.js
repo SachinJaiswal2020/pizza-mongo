@@ -5285,7 +5285,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var addToCart = document.querySelectorAll('.add-to-class');
-var cartCounter = document.querySelector('#cartCounter');
+var cartCounter = document.querySelector('#cartCounter'); //third
 
 function updateCart(pizza) {
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/update-cart', pizza).then(function (res) {
@@ -5295,7 +5295,7 @@ function updateCart(pizza) {
       type: 'success',
       timeout: 1000,
       text: 'Item added to cart',
-      progressBar: true,
+      progressBar: false,
       layout: 'topRight'
     }).show();
   })["catch"](function (err) {
@@ -5303,17 +5303,21 @@ function updateCart(pizza) {
       type: 'error',
       timeout: 1000,
       text: 'Something went wrong',
-      progressBar: true,
+      progressBar: false,
       layout: 'topRight'
     }).show();
   });
 }
 
 addToCart.forEach(function (btn) {
+  //first
   btn.addEventListener('click', function (e) {
     // console.log(e)
-    var pizza = JSON.parse(btn.dataset.pizza);
-    updateCart(pizza); // console.log(pizza)
+    //second
+    var food = JSON.parse(btn.dataset.pizza); // console.log(food)
+    //third
+
+    updateCart(food);
   });
 });
 
