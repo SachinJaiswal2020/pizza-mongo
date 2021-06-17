@@ -30,7 +30,7 @@ section.hero{
     background: $secondary;
 }
 
-.add-to-class{
+.add-to-cart, .decrement, .increment{
     border: 2px solid $primary;
     color: $primary;
     transition: $smooth;
@@ -193,4 +193,27 @@ padding-left: 20px;
     float: right;
     font-size: 14px;
     margin-top: 8px;
+}
+
+@media(max-width: 1060px){
+    .container{
+        max-width: 90%;
+    }
+    table{
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+}
+
+@media(max-width: 768px){
+    .status-box ul li span:before{
+        font-size: 34px;   
+    }
+}
+
+.error_page{
+    font-size: 44px;
+    font-weight: 900;
 }
