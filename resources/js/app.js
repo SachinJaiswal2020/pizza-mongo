@@ -78,6 +78,10 @@ function decreaseCart(pizza) {
 addToCart.forEach((btn) => {
     btn.addEventListener('click', (e) => {
        let pizza = JSON.parse(btn.dataset.pizza)
+       // if data fetched from session , there will be have "item object" => (cart.ejs)
+       if (pizza.item) {
+           pizza = pizza.item;
+       }
        updateCart(pizza)
        })
    })
@@ -85,6 +89,9 @@ addToCart.forEach((btn) => {
    incrementCart.forEach((btn) => {
     btn.addEventListener('click', (e) => {
        let pizza = JSON.parse(btn.dataset.pizza)
+       if (pizza.item) {
+           pizza = pizza.item;
+       }
        increaseCart(pizza)
        })
    })
@@ -92,7 +99,7 @@ addToCart.forEach((btn) => {
    decrementCart.forEach((btn) => {
        btn.addEventListener("click", (e) => {
        let pizza = JSON.parse(btn.dataset.pizza)
-       decreaseCart(pizza)
+       decreaseCart(pizza.item)
    })
 })
 
