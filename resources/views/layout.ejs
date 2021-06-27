@@ -27,6 +27,7 @@
                 <% if(user) { %>
                     <%if( user.role==='admin' ){%>
                         <li class="ml-6"><a href="/admin/orders">Orders</a></li>
+                        <li class="ml-6"><a href="/admin/addpizza">ADD</a></li>
                         <%}else{%>
                             <li class="ml-6"><a href="/customers/orders">My Orders</a></li>
                             <%}%>

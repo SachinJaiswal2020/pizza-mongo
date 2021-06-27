@@ -1,65 +1,74 @@
 [{
   "_id": {
-    "$oid": "5eee651f739f8c674fd736ee"
+    "$oid": "5eee651f739f8c674fd73aaa"
   },
   "name": "Margherita",
-  "image": "pizza.png",
+  "image": "/img/pizza.png",
   "price": "250",
   "size": "small"
 },{
   "_id": {
-    "$oid": "5eee6671a27a66807cf2bea3"
+    "$oid": "5eee6671a27a66807cf2baa1"
   },
   "name": "Marinara",
-  "image": "pizza.png",
+  "image": "/img/pizza.png",
   "price": "300",
   "size": "medium"
 },{
   "_id": {
-    "$oid": "5eee6692a27a66807cf2bea4"
+    "$oid": "5eee6692a27a66807cf2baa2"
   },
   "name": "Carbonara",
-  "image": "pizza.png",
+  "image": "/img/pizza.png",
   "price": "200",
   "size": "small"
 },{
   "_id": {
-    "$oid": "5eee66a5a27a66807cf2bea5"
+    "$oid": "5eee66a5a27a66807cf2baa3"
   },
   "name": "Americana",
-  "image": "pizza.png",
+  "image": "/img/pizza.png",
   "price": "500",
   "size": "large"
 },{
   "_id": {
-    "$oid": "5eee66c4a27a66807cf2bea6"
+    "$oid": "5eee66c4a27a66807cf2baa4"
   },
   "name": "Chicken Mushroom",
-  "image": "pizza.png",
+  "image": "/img/pizza.png",
   "price": "350",
   "size": "medium"
 },{
   "_id": {
-    "$oid": "5eee66cfa27a66807cf2bea7"
+    "$oid": "5eee66cfa27a66807cf2baa5"
   },
   "name": "Paneer pizza",
-  "image": "pizza.png",
+  "image": "/img/pizza.png",
   "price": "200",
   "size": "small"
 },{
   "_id": {
-    "$oid": "5eee66eea27a66807cf2bea8"
+    "$oid": "5eee66eea27a66807cf2baa6"
   },
   "name": "Vegies pizza",
-  "image": "pizza.png",
+  "image": "/img/pizza.png",
   "price": "600",
   "size": "large"
-},{ 
+},{
   "_id": {
-    "$oid": "5eee6717a27a66807cf2bea9"
+    "$oid": "5eee6717a27a66807cf2baa7"
   },
   "name": "Pepperoni",
-  "image": "pizza.png",
+  "image": "/img/pizza.png",
   "price": "500",
   "size": "medium"
+},{
+  "_id": {
+    "$oid": "60d85c14b091ef3cd4a1efc1"
+  },
+  "name": "pizza",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvDLrcjXCwhXtPNmAnzdo0faTdX3DahmB6Cw&usqp=CAU",
+  "price": 399,
+  "size": "medium",
+  "__v": 0
 }]
