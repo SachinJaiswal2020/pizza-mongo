@@ -1,49 +1,59 @@
 const Menu = require('../../../models/menu')
+const multer = require('multer')
+const path = require('path')
+
 
 function addController() {
+
+        let storage = multer.diskStorage({
+            destination: 'public/img/' ,
+            filename: (req, file, cb) => {
+              const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${path.extname(file.originalname)}`;
+              cb(null, uniqueName)
+            } 
+        })
+
+        let upload = multer({ storage: storage }).single('image')
 
     return{
         add(req,res) {
             res.render('admin/addpizza')
         },
-        async postAdd(req, res) {
-            const { name, image, price, size } = req.body
+        postAdd(req, res) {
+            upload(req, res, async (err) => {
+            // console.log(req.file)
+            const { name, price, size } = req.body
 
             //VALIDATING REQUESTS
-            if (!name || !image || !price || !size) {
+            if(!name || !price || !size){
                 req.flash('error', 'All fields are required')
-                req.flash('image', image)
-                req.flash('price', price)
                 return res.redirect('/admin/addpizza')
             }
 
-            Menu.exists({name: name , size: size}, (err, result) => {
-                if (result) {
-                    req.flash('error', 'Pizza already Exists')
-                    req.flash('image', image)
-                    req.flash('price', price)
-                    return res.redirect('/admin/addpizza')
+            Menu.exists({name: name}, (err, result) =>{
+                if(result){
+                req.flash('error', 'Name already Exist')
+                return res.redirect('/admin/addpizza')
                 }
             })
 
-            //CREATING Menu IN DB
-            const menu = await new Menu({
-                name, 
-                image,
-                price, 
-                size
+            const menu = new Menu({
+                name: name, 
+                image: req.file.filename,
+                price: price, 
+                size: size
             })
-
-            menu.save().then(() => {
+            
+            //CREATING Menu IN DB
+            await menu.save().then(() => {
                 return res.redirect('/')
             }).catch(err => {
                 req.flash('error', 'Something went wrong')
                 return res.redirect('/admin/addpizza')
             })
 
-            // console.log(req.body)
-        },
+        })
     }
 }
-
+}
 module.exports = addController

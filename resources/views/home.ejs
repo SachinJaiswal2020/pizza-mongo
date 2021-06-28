@@ -1,5 +1,3 @@
-
-
         <section class="hero py-16">
             <div class="container mx-auto flex items-center justify-between">
                 <div class="w-1/2">
@@ -21,16 +19,26 @@
                 <% pizzas.forEach(function(pizza) { %>
 
                      <div class="w-full sm:w-64 pizzas py-2">
-                    <img class="h-40 mb-4 mx-auto" src="<%= pizza.image %>" alt="pizza-1">
+                    <img class="h-40 mb-4 mx-auto" src="/img/<%= pizza.image %>" alt="pizza-1">
                     <div class="text-center">
                         <h2 class="mb-4 text-lg"><%= pizza.name %></h2>
                         <span class="size py-1 px-4 rounded-full uppercase text-xs"><%= pizza.size %></span>
                         <div class="flex items-center justify-around mt-6">
                             <span class="font-bold text-lg">₹<%= pizza.price %></span>
+                            <% if(user) { %>
+                                <%if( user.role==='customer' ){%>
                             <button data-pizza="<%= JSON.stringify(pizza) %>" class="add-to-cart py-1 px-6 rounded-full items-center font-bold">
                                 <span>+</span>
                                 <span class="ml-4">Add</span>
                             </button>
+                            <%}else{%>
+                                <% } %>
+                                    <%}else{%>
+                                    <button data-pizza="<%= JSON.stringify(pizza) %>" class="add-to-cart py-1 px-6 rounded-full items-center font-bold">
+                                        <span>+</span>
+                                        <span class="ml-4">Add</span>
+                                    </button>
+                                        <%}%>
                         </div>
                     </div>
                 </div>
