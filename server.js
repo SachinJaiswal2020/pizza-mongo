@@ -54,9 +54,9 @@ app.use(flash())
 
 
 //ASSEST
-app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(express.static('public'))
 
 
 //GLOBAL MIDDLEWARE

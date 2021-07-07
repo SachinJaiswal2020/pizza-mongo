@@ -5,6 +5,7 @@ const orderController = require('../app/http/controllers/customers/orderControll
 const adminOrderController = require('../app/http/controllers/admin/orderController')
 const statusController = require('../app/http/controllers/admin/statusController')
 const addController = require('../app/http/controllers/admin/addController')
+const editController = require('../app/http/controllers/admin/editController')
 
 //Middlewares
 const guest = require('../app/http/middleware/guest')
@@ -35,8 +36,11 @@ function initRoutes(app) {
         //Admin routes
         app.get('/admin/orders', admin, adminOrderController().index)
         app.post('/admin/orders/status', admin, statusController().update)
-        app.get('/admin/addpizza', admin, addController().add)
-        app.post('/admin/addpizza', admin, addController().postAdd)
+        app.get('/admin/addpizza', admin, addController().index)
+        app.post('/admin/addpizza', admin, addController().add)
+        app.get('/admin/editpizza/:id', admin, editController().show)
+        app.post('/admin/editpizza/:id', admin, editController().update)
+        app.get('/admin/deletepizza/:id', admin, editController().delete)
 
 //(req,res) => {
 //     res.render('home')

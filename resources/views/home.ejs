@@ -21,7 +21,7 @@
                      <div class="w-full sm:w-64 pizzas py-2">
                     <img class="h-40 mb-4 mx-auto" src="/img/<%= pizza.image %>" alt="pizza-1">
                     <div class="text-center">
-                        <h2 class="mb-4 text-lg"><%= pizza.name %></h2>
+                        <h2 class="mb-4 text-lg capitalize"><%= pizza.name %></h2>
                         <span class="size py-1 px-4 rounded-full uppercase text-xs"><%= pizza.size %></span>
                         <div class="flex items-center justify-around mt-6">
                             <span class="font-bold text-lg">₹<%= pizza.price %></span>
@@ -32,6 +32,10 @@
                                 <span class="ml-4">Add</span>
                             </button>
                             <%}else{%>
+                                <a href="/admin/editpizza/<%= pizza._id %>" class="py-1 px-6 rounded-full items-center font-bold"><i class="las la-pen"
+                                        style="font-size: 24px;"></i></a>
+                                <a href="/admin/deletepizza/<%= pizza._id %>" class="py-1 px-6 rounded-full font-bold"><i class="las la-trash-alt"
+                                        style="font-size: 24px;"></i></a>
                                 <% } %>
                                     <%}else{%>
                                     <button data-pizza="<%= JSON.stringify(pizza) %>" class="add-to-cart py-1 px-6 rounded-full items-center font-bold">

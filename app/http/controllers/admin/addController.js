@@ -16,10 +16,10 @@ function addController() {
         let upload = multer({ storage: storage }).single('image')
 
     return{
-        add(req,res) {
+        index(req,res) {
             res.render('admin/addpizza')
         },
-        postAdd(req, res) {
+        add(req, res) {
             upload(req, res, async (err) => {
             // console.log(req.file)
             const { name, price, size } = req.body
@@ -30,13 +30,11 @@ function addController() {
                 return res.redirect('/admin/addpizza')
             }
 
-            Menu.exists({name: name}, (err, result) =>{
-                if(result){
+            if(await Menu.exists({name:{'$regex': name, $options:'i'}})){
                 req.flash('error', 'Name already Exist')
                 return res.redirect('/admin/addpizza')
-                }
-            })
-
+            }
+            else{
             const menu = new Menu({
                 name: name, 
                 image: req.file.filename,
@@ -51,7 +49,7 @@ function addController() {
                 req.flash('error', 'Something went wrong')
                 return res.redirect('/admin/addpizza')
             })
-
+            }
         })
     }
 }
