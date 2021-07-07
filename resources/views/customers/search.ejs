@@ -1,0 +1,51 @@
+<section class="menu container mx-auto py-8">
+    <h1 class="text-xl font-bold mb-8">All Pizzas</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-12 gap-x-16">
+
+        <% if(pizza.length) { for(var i=0; i < pizza.length; i++) { %>
+
+            <div class="w-full sm:w-64 pizzas py-2">
+                <img class="h-40 mb-4 mx-auto" src="/img/<%= pizza[i].image %>" alt="pizzas">
+                <div class="text-center">
+                    <h2 class="mb-4 text-lg capitalize">
+                        <%= pizza[i].name %>
+                    </h2>
+                    <span class="size py-1 px-4 rounded-full uppercase text-xs">
+                        <%= pizza[i].size %>
+                    </span>
+                    <div class="flex items-center justify-around mt-6">
+                        <span class="font-bold text-lg">₹<%= pizza[i].price %></span>
+                        <% if(user) { %>
+                            <%if( user.role==='customer' ){%>
+                                <button data-pizza="<%= JSON.stringify(pizza[i]) %>"
+                                    class="add-to-cart py-1 px-6 rounded-full items-center font-bold">
+                                    <span>+</span>
+                                    <span class="ml-4">Add</span>
+                                </button>
+                                <%}else{%>
+                                    <a href="/admin/editpizza/<%= pizza[i]._id %>"
+                                        class="py-1 px-6 rounded-full items-center font-bold"><i class="las la-pen"
+                                            style="font-size: 24px;"></i></a>
+                                    <a href="/admin/deletepizza/<%= pizza[i]._id %>"
+                                        class="py-1 px-6 rounded-full font-bold"><i class="las la-trash-alt"
+                                            style="font-size: 24px;"></i></a>
+                                    <% } %>
+                                        <%}else{%>
+                                            <button data-pizza="<%= JSON.stringify(pizza[i]) %>"
+                                                class="add-to-cart py-1 px-6 rounded-full items-center font-bold">
+                                                <span>+</span>
+                                                <span class="ml-4">Add</span>
+                                            </button>
+                                            <%}%>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+                <% } else { %>
+                    <h6 class="text-lg"><em>No Pizza Found</em></h6>
+
+                    <% } %>
+
+
+    </div>
+</section>
