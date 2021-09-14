@@ -1,6 +1,8 @@
 const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+const sgMail = require("@sendgrid/mail");
+const API = sgMail.setApiKey(process.env.MAIL_KEY);
 
 function authController() {
 
@@ -74,7 +76,20 @@ function authController() {
                 password: hashPassword
             })
 
+            const Message = {
+              to: ["sachin.jayswal2020@gmail.com", email],
+              from: {
+                name: "Sachin Jaiswal",
+                email: "sachin.jayswal2020@gmail.com",
+              },
+              subject: "Registration",
+              text: `Thank You For Registering ${name} , Let Order Some Pizza`,
+              html: `<h3>Thank You For Registering ${name}.</h3>
+                        <h3>Let's Order Some Pizza</h3>`,
+            };
+
             user.save().then(() =>{
+                sgMail.send(Message);
                 return res.redirect('/login')
             }).catch(err =>{
                 req.flash('error', 'Something went wrong')

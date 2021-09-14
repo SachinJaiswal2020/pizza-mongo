@@ -1,6 +1,8 @@
 const Order = require('../../../models/order')
 const moment = require('moment')
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+const sgMail = require("@sendgrid/mail");
+const API = sgMail.setApiKey(process.env.MAIL_KEY);
 
 function orderController () {
     return{
@@ -18,6 +20,34 @@ function orderController () {
                 phone,
                 address
             })
+
+             function renderItems(items) {
+               let parsedItems = Object.values(items);
+               return parsedItems
+                 .map((menuItem) => {
+                   return `<p>${menuItem.item.name} - ${menuItem.qty} pcs</p>`;
+                 })
+                 .join("");
+             }
+             const Message = {
+               to: ["sachin.jayswal2020@gmail.com", req.user.email],
+               from: {
+                 name: "Sachin Jaiswal",
+                 email: "sachin.jayswal2020@gmail.com",
+               },
+               subject: "ORDER Confirmed",
+               text:
+                 "Order Placed Successfully, It will be delivered in 45min.",
+               html: `<p>Hello ${req.user.name},</p> 
+                            <h3>Order Placed Successfully</h3>
+                            <p>It will be delivered in 45min.</p>
+                            <div>Items: ${renderItems(
+                              req.session.cart.items
+                            )}</div>
+                            <h3>Total Price: ${req.session.cart.totalPrice}</h3>
+                            <h3>Payment: ${paymentType}</h3>`,
+             };
+
             order.save().then(result => {
                 Order.populate(result, { path: 'customerId', select: '-password'  }, (err, placedOrder) => {
                     // req.flash('success', 'Order placed successfully')
@@ -37,6 +67,12 @@ function orderController () {
                                 const eventEmitter = req.app.get('eventEmitter')
                                 eventEmitter.emit('orderPlaced', ord)
                                 delete req.session.cart
+                                sgMail
+                                  .send(Message)
+                                  .then((response) =>
+                                    console.log("Email Sent...")
+                                  )
+                                  .catch((error) => console.log(error.Message));
                                 return res.json({ message : 'Payment successful, Order placed successfully' });
                             }).catch((err) => {
                                 console.log(err)
@@ -46,12 +82,20 @@ function orderController () {
                             const eventEmitter = req.app.get('eventEmitter')
                             eventEmitter.emit('orderPlaced', result)
                             delete req.session.cart
+                            sgMail
+                              .send(Message)
+                              .then((response) => console.log("Email Sent..."))
+                              .catch((error) => console.log(error.Message));
                             return res.json({ message : 'OrderPlaced but payment failed, You can pay at delivery time' });
                         })
                     } else {
                         const eventEmitter = req.app.get('eventEmitter')
                         eventEmitter.emit('orderPlaced', result)
                         delete req.session.cart
+                        sgMail
+                          .send(Message)
+                          .then((response) => console.log("Email Sent..."))
+                          .catch((error) => console.log(error.Message));
                         return res.json({ message : 'Order placed succesfully' });
                     }
                 })

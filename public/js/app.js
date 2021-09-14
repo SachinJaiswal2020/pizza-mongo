@@ -28260,7 +28260,7 @@ function _initStripe() {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return Object(_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_1__["loadStripe"])('pk_test_51JAahZSG7SdIzAq0dGNMWduYF0WCVkvztyke8OHc4Xb8ArmRFvMfI9C7UPVTZNIcycAb7goCzGxCTg0SEoamHL5i00hoFj18zd');
+            return Object(_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_1__["loadStripe"])("pk_test_51JZS1bSB20M2OG7t3jDCs1tplzcscCRlKxt2rczfUh8GySEKi1sdOQB5uLb5eQe6zhVvegQKlljtqR26gkw2YL3r00Ce9N2qrS");
 
           case 2:
             stripe = _context2.sent;
